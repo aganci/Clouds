@@ -51,4 +51,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, getRight(), getBottom(), paint);
     }
+
+    public void update(long delta) {
+        game.update(delta);
+    }
+
+    public Paint getPaint() {
+        return paint;
+    }
 }
