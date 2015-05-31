@@ -10,16 +10,18 @@ import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     GameLoopThread thread;
+    Paint paint = new Paint();
+    Game game = new Game();
+
 
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
-
-        thread = new GameLoopThread(this);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        thread = new GameLoopThread(this);
         thread.setRunning(true);
         thread.start();
     }
@@ -34,14 +36,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         thread.setRunning(false);
         try {
             thread.join();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
         }
     }
 
     public void render(Canvas canvas) {
-        Paint paint = new Paint();
+        clearScreen(canvas);
+        game.render(canvas);
+    }
 
-        paint.setColor(Color.RED);
+    private void clearScreen(Canvas canvas) {
+        paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, getRight(), getBottom(), paint);
     }
 }
