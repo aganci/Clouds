@@ -14,8 +14,6 @@ public class GameLoopThread extends Thread {
     @Override
     public void run() {
         while(running) {
-            Log.d("GameLoopThread", "running");
-
             Canvas canvas = gameView.getHolder().lockCanvas();
 
             if (canvas == null) {
@@ -31,8 +29,6 @@ public class GameLoopThread extends Thread {
             } catch (InterruptedException e) {
             }
         }
-
-        Log.d("GameLoopThread", "ended");
     }
 
     public void setRunning(boolean running) {

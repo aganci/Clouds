@@ -16,12 +16,17 @@ public class Game {
     }
 
     public void render(Canvas canvas) {
-        paint.setColor(Color.RED);
-        canvas.drawRect(x, y, x + 10, y + 20, paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect(x, y, x + 100, y + 200, paint);
 
         x++;
         if (x >= gameView.getWidth()) {
             x = 0;
+        }
+
+        y++;
+        if (y >= gameView.getHeight()) {
+            y = 0;
         }
     }
 }
