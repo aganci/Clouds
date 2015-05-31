@@ -1,6 +1,9 @@
 package com.aganci.gametemplate;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -8,12 +11,11 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     GameLoopThread thread;
 
-
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
 
-        thread = new GameLoopThread();
+        thread = new GameLoopThread(this);
     }
 
     @Override
@@ -34,5 +36,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             thread.join();
         } catch (InterruptedException e) {
         }
+    }
+
+    public void render(Canvas canvas) {
+        Paint paint = new Paint();
+
+        paint.setColor(Color.RED);
+        canvas.drawRect(0, 0, getRight(), getBottom(), paint);
     }
 }
