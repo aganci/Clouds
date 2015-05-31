@@ -7,8 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class GameMainActivity extends Activity {
+    GameView gameView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gameView = new GameView(this);
+        setContentView(gameView);
     }
 }
