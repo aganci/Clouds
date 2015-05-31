@@ -48,7 +48,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void clearScreen(Canvas canvas) {
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.rgb(126, 202, 247));
         canvas.drawRect(0, 0, getRight(), getBottom(), paint);
     }
 

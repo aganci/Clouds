@@ -3,32 +3,34 @@ package com.aganci.gametemplate;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
+
+import java.util.ArrayList;
 
 public class Game {
     private GameView gameView;
-    Paint paint = new Paint();
+    MediaPlayer mediaPlayer;
 
-    int x = 0;
-    int y = 0;
+    ArrayList<Cloud> clouds = new ArrayList<>();
 
     public Game(GameView gameView) {
         this.gameView = gameView;
+        for (int i = 0; i < 10; i++) {
+            clouds.add(new Cloud(gameView));
+        }
+        mediaPlayer = MediaPlayer.create(gameView.getContext(), R.raw.music);
+        mediaPlayer.start();
     }
 
     public void render(Canvas canvas) {
-        paint.setColor(Color.GREEN);
-        canvas.drawRect(x, y, x + 100, y + 200, paint);
+        for(Cloud cloud : clouds) {
+            cloud.render(canvas);
+        }
     }
 
     public void update(long delta) {
-        x += delta / 10;
-        if (x >= gameView.getWidth()) {
-            x = 0;
-        }
-
-        y += delta / 10;
-        if (y >= gameView.getHeight()) {
-            y = 0;
+        for(Cloud cloud : clouds) {
+            cloud.update(delta);
         }
     }
 }
