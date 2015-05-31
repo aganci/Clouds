@@ -5,11 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
-public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
     GameLoopThread thread;
     Paint paint = new Paint();
     Game game;
@@ -29,6 +31,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         thread.setRunning(true);
         thread.start();
         mediaPlayer.start();
+        setOnTouchListener(this);
     }
 
     @Override
@@ -63,5 +66,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public Paint getPaint() {
         return paint;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return game.onTouch(v, event);
     }
 }
