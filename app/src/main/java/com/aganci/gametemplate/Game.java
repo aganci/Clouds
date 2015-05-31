@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Game {
     private GameView gameView;
-    MediaPlayer mediaPlayer;
 
     ArrayList<Cloud> clouds = new ArrayList<>();
 
@@ -18,8 +17,6 @@ public class Game {
         for (int i = 0; i < 10; i++) {
             clouds.add(new Cloud(gameView));
         }
-        mediaPlayer = MediaPlayer.create(gameView.getContext(), R.raw.music);
-        mediaPlayer.start();
     }
 
     public void render(Canvas canvas) {

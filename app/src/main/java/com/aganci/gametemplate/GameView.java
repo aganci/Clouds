@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -12,11 +13,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     GameLoopThread thread;
     Paint paint = new Paint();
     Game game;
+    MediaPlayer mediaPlayer;
 
 
     public GameView(Context context) {
         super(context);
         game = new Game(this);
+        mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.music);
         getHolder().addCallback(this);
     }
 
@@ -25,6 +28,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         thread = new GameLoopThread(this);
         thread.setRunning(true);
         thread.start();
+        mediaPlayer.start();
     }
 
     @Override
@@ -34,6 +38,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        mediaPlayer.stop();
         thread.setRunning(false);
         try {
             thread.join();
