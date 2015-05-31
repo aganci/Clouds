@@ -11,11 +11,12 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     GameLoopThread thread;
     Paint paint = new Paint();
-    Game game = new Game();
+    Game game;
 
 
     public GameView(Context context) {
         super(context);
+        game = new Game(this);
         getHolder().addCallback(this);
     }
 
