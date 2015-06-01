@@ -9,12 +9,11 @@ import android.view.MenuItem;
 
 public class GameMainActivity extends Activity {
     GameView gameView;
-    public static AssetManager assets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assets = getAssets();
+        Assets.init(getAssets());
         gameView = new GameView(this);
         setContentView(gameView);
     }

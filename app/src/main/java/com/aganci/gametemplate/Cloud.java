@@ -2,7 +2,6 @@ package com.aganci.gametemplate;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.RectF;
 
 public class Cloud {
@@ -14,8 +13,6 @@ public class Cloud {
 
     public Cloud(GameView gameView) {
         this.gameView = gameView;
-        int index = RandomNumberGenerator.getRandIntBetween(1, 4);
-        bitmap = Assets.loadBitmap("cloud-" + String.valueOf(index) + ".png");
     }
 
     public void render(Canvas canvas) {
@@ -40,6 +37,8 @@ public class Cloud {
     }
 
     public void randomize() {
+        int index = RandomNumberGenerator.getRandIntBetween(1, 4);
+        bitmap = Assets.getImage("cloud-" + String.valueOf(index));
         x = -bitmap.getWidth();
         y = RandomNumberGenerator.getRandInt(gameView.getHeight() - 1);
         velocity = RandomNumberGenerator.getRandIntBetween(5, 50);

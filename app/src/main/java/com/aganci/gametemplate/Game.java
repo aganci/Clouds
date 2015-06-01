@@ -11,21 +11,22 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class Game {
-    private GameView gameView;
 
     ArrayList<Cloud> clouds = new ArrayList<>();
+    Score score;
 
     public Game(GameView gameView) {
-        this.gameView = gameView;
         for (int i = 0; i < 10; i++) {
             clouds.add(new Cloud(gameView));
         }
+        score = new Score(gameView);
     }
 
     public void render(Canvas canvas) {
         for(Cloud cloud : clouds) {
             cloud.render(canvas);
         }
+        score.render(canvas);
     }
 
     public void update(long delta) {
@@ -35,12 +36,16 @@ public class Game {
     }
 
     public boolean onTouch(View v, MotionEvent event) {
-        Log.d("Game", "On thouch");
+        if (event.getAction() != MotionEvent.ACTION_UP) {
+            return true;
+        }
 
         for(Cloud cloud : clouds) {
             if (cloud.hasHit(event.getX(), event.getY())) {
-                Log.d("Game", "*******************HIT ********************* ");
+                Assets.playShot();
                 cloud.randomize();
+                score.increment();
+                break;
             }
         }
         return true;
