@@ -41,6 +41,6 @@ public class Cloud {
         bitmap = Assets.getImage("cloud-" + String.valueOf(index));
         x = -bitmap.getWidth();
         y = RandomNumberGenerator.getRandInt(gameView.getHeight() - 1);
-        velocity = RandomNumberGenerator.getRandIntBetween(5, 50);
+        velocity = RandomNumberGenerator.getRandIntBetween(20, 50);
     }
 }

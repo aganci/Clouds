@@ -13,16 +13,23 @@ import java.util.ArrayList;
 public class Game {
 
     ArrayList<Cloud> clouds = new ArrayList<>();
+    ArrayList<Bird> birds = new ArrayList<>();
     Score score;
 
     public Game(GameView gameView) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
+            birds.add(new Bird(gameView));
+        }
+        for (int i = 0; i < 100; i++) {
             clouds.add(new Cloud(gameView));
         }
         score = new Score(gameView);
     }
 
     public void render(Canvas canvas) {
+        for(Bird bird : birds) {
+            bird.render(canvas);
+        }
         for(Cloud cloud : clouds) {
             cloud.render(canvas);
         }
@@ -30,6 +37,9 @@ public class Game {
     }
 
     public void update(long delta) {
+        for(Bird bird : birds) {
+            bird.update(delta);
+        }
         for(Cloud cloud : clouds) {
             cloud.update(delta);
         }
@@ -40,10 +50,11 @@ public class Game {
             return true;
         }
 
-        for(Cloud cloud : clouds) {
-            if (cloud.hasHit(event.getX(), event.getY())) {
-                Assets.playShot();
-                cloud.randomize();
+        Assets.playShot();
+
+        for(Bird bird : birds) {
+            if (bird.hasHit(event.getX(), event.getY())) {
+                bird.randomize();
                 score.increment();
                 break;
             }

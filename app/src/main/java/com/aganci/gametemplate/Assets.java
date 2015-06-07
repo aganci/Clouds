@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.view.animation.Animation;
 
 
 import java.io.IOException;
@@ -27,6 +28,10 @@ public class Assets {
 		images.put("cloud-4", loadBitmap("cloud-4.png", assets));
 
 		shotId = loadSound("shot.wav", assets);
+
+		images.put("bird-frame-1", loadBitmap("bird-frame-1.png", assets));
+		images.put("bird-frame-2", loadBitmap("bird-frame-2.png", assets));
+		images.put("bird-frame-3", loadBitmap("bird-frame-3.png", assets));
 	}
 
 	public static void playShot() {
